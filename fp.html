@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://www.opensecrets.org/elections-overview/top-self-funders?cycle=2016" style="color: crimson">OpenSecrets</a></p>
 <p>The <strong>independent variable</strong> in this study is the <em>amount of money that each candidate has for campaign funding</em>. The <strong>dependent variable</strong> is the <em>share percentage of votes the candidates receive</em> and <em>the results that each candidate yielded from the election</em>.</p>
 <p>In order to identify a relationship between overall campaign funding, share percentage of votes from election, and candidates results from the election, this analysis is utilizing a correlation research design.</p>
-<p>The graph below represents the top twenty candidatyes with the highest campaign funding from 2016 to 2020.</p>
+<p>The graph below represents the top twenty candidates with the highest campaign funding from 2016 to 2020.</p>
 <div class="cell">
 <details>
 <summary>Show Code</summary>
@@ -308,12 +308,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>Show Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_p_value</span>(null_dist, correlation, <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  p_value
-    &lt;dbl&gt;
-1    0.05</code></pre>
-</div>
 </div>
 <p>In this study, the null hypothesis suggest that there is no relationship between the amount of campaign funding a candidate received and the share percentage of votes they received in the election. With a significance level of ⍺ = 0.05, we would fail to reject the null hypothesis with a p-value of 0.072. Therefore, we conclude that there is not a statistically significant relationship between campaign funds and the share percentage of votes candidates receive in elections.</p>
 </section>
@@ -324,65 +318,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Show Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>regr_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(overallfunding <span class="sc">~</span> pervote <span class="sc">+</span> Result, <span class="at">data =</span> cand_sp)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">get_regression_table</span>(regr_2)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>regr_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(overallfunding <span class="sc">~</span> pervote <span class="sc">+</span> Result, <span class="at">data =</span> cand_sp)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">get_regression_table</span>(regr_2)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 15%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 10%">
-<col style="width: 15%">
-<col style="width: 15%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std_error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p_value</th>
-<th style="text-align: right;">lower_ci</th>
-<th style="text-align: right;">upper_ci</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">intercept</td>
-<td style="text-align: right;">2509749.46</td>
-<td style="text-align: right;">5177210</td>
-<td style="text-align: right;">0.485</td>
-<td style="text-align: right;">0.630</td>
-<td style="text-align: right;">-7899729.1</td>
-<td style="text-align: right;">12919228.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">pervote</td>
-<td style="text-align: right;">87475.74</td>
-<td style="text-align: right;">125817</td>
-<td style="text-align: right;">0.695</td>
-<td style="text-align: right;">0.490</td>
-<td style="text-align: right;">-165496.2</td>
-<td style="text-align: right;">340447.7</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Result: Won</td>
-<td style="text-align: right;">6217351.12</td>
-<td style="text-align: right;">4271917</td>
-<td style="text-align: right;">1.455</td>
-<td style="text-align: right;">0.152</td>
-<td style="text-align: right;">-2371913.3</td>
-<td style="text-align: right;">14806615.5</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <section id="interpretation-1" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
@@ -391,17 +332,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Show Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cand_sp<span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> overallfunding,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> pervote))<span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>)<span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>()<span class="sc">+</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Overall Campaign Funding(k) "</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Share Percentage Of Vote (%)"</span>,</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">" Share Percentage of Vote vs. Campaign Funding"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cand_sp<span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> overallfunding,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> pervote))<span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>)<span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>()<span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Overall Campaign Funding(k) "</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Share Percentage Of Vote (%)"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">" Share Percentage of Vote vs. Campaign Funding"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="fp_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
@@ -412,6 +353,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level2" style="color: crimson">
 <h2 style="color: crimson" class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Limitations</p>
+<p>It should be noted that this study only only considers monetary funding as the main independent variable and thus the variable that is causing the outcomes. However, in governmental elections that are a host of factors that actually effect why a candidate may or may not be able to secure the seat. There were also candidates that had to be removed from the original data set because they were included in the main data frame but may have not made it to the main election.</p>
+<p>Future Improvements</p>
+<p>In future studies more factors can be evaluated that are related to</p>
 </section>
 </section>
 
